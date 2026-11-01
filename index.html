@@ -1,61 +1,108 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Weather Dashboard</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weatherly | Weather Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-
-    <div class="container">
-
-        <h1>Weather Dashboard 🌤️</h1>
-
-        <div class="search-box">
-            <input
-                type="text"
-                id="cityInput"
-                placeholder="Enter City Name"
-            >
-
-            <button onclick="getWeather()">
-                Search
-            </button>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-icon">☀</span><span>weatherly</span></a>
+      <p class="side-label">MENU</p>
+      <a class="nav-item active" href="#"><span>▦</span> Overview</a>
+      <a class="nav-item" href="#forecast"><span>◷</span> 5-day forecast</a>
+      <div class="sidebar-bottom">
+        <div class="tip-card">
+          <span class="tip-icon">☂</span>
+          <h3>Weather tip</h3>
+          <p id="weatherTip">Search a city to get a useful weather tip.</p>
         </div>
+        <p class="side-foot">Weather data by Open-Meteo</p>
+      </div>
+    </aside>
 
-        <div id="weatherResult">
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR WEATHER, AT A GLANCE</p>
+          <h1>Weather dashboard</h1>
+        </div>
+        <form id="searchForm" class="search-form">
+          <span class="search-icon">⌕</span>
+          <input id="cityInput" type="text" value="Tiruppur" placeholder="Search city..." aria-label="Search city" required>
+          <button id="searchButton" type="submit">Search</button>
+        </form>
+      </header>
 
-            <h2 id="city">City Name</h2>
+      <div id="status" class="status" role="status" aria-live="polite">Loading weather...</div>
 
-            <h1 id="temperature">-- °C</h1>
+      <section class="welcome-row">
+        <div>
+          <p class="eyebrow">CURRENT LOCATION</p>
+          <h2 id="cityName">Tiruppur, India</h2>
+          <p class="muted" id="localTime">Your local weather information</p>
+        </div>
+        <div class="date-pill"><span>◷</span> <span id="todayDate">Today</span></div>
+      </section>
 
-            <p id="condition">Weather Condition</p>
-
-            <div class="details">
-
-                <p>Humidity:
-                    <span id="humidity">--</span>
-                </p>
-
-                <p>Wind Speed:
-                    <span id="wind">--</span>
-                </p>
-
+      <section class="dashboard-grid" id="weatherPanel">
+        <article class="current-card">
+          <div class="current-top">
+            <div>
+              <p class="card-kicker">NOW</p>
+              <h3 id="condition">Partly cloudy</h3>
+              <p class="muted" id="feelsText">Feels like --°</p>
             </div>
+            <div class="weather-art" id="weatherIcon">⛅</div>
+          </div>
+          <div class="temperature-line">
+            <span id="temperature">--°</span><span class="degree">C</span>
+          </div>
+          <p class="current-footer">Live conditions <span class="live-dot"></span></p>
+        </article>
 
+        <article class="metric-card">
+          <div class="metric-heading"><span class="metric-icon humidity">◉</span><span>Humidity</span></div>
+          <div class="metric-number" id="humidity">--<small>%</small></div>
+          <p class="metric-note">Relative humidity</p>
+          <div class="meter"><span id="humidityBar"></span></div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-heading"><span class="metric-icon wind">≋</span><span>Wind speed</span></div>
+          <div class="metric-number" id="wind">--<small> km/h</small></div>
+          <p class="metric-note">Wind at 10 metres</p>
+          <div class="metric-note strong" id="windDirection">Current wind</div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-heading"><span class="metric-icon feels">♨</span><span>Feels like</span></div>
+          <div class="metric-number" id="feelsLike">--<small>°C</small></div>
+          <p class="metric-note">Apparent temperature</p>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-heading"><span class="metric-icon rain">☔</span><span>Precipitation</span></div>
+          <div class="metric-number" id="precipitation">--<small> mm</small></div>
+          <p class="metric-note">Current precipitation</p>
+        </article>
+      </section>
+
+      <section class="forecast-section" id="forecast">
+        <div class="section-heading">
+          <div><p class="eyebrow">PLAN AHEAD</p><h2>5-day forecast</h2></div>
+          <span class="muted">Daily outlook</span>
         </div>
+        <div class="forecast-grid" id="forecastGrid">
+          <div class="forecast-placeholder">Forecast will appear here after loading.</div>
+        </div>
+      </section>
 
-        <p id="error"></p>
-
-    </div>
-
-    <script src="script.js"></script>
-
+      <footer class="footer">Weather data provided by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · Refresh by searching a city</footer>
+    </main>
+  </div>
 </body>
 </html>
